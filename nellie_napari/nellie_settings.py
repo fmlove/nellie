@@ -1,3 +1,4 @@
+from PyQt5.QtWidgets import QDoubleSpinBox
 from qtpy.QtWidgets import QWidget, QCheckBox, QSpinBox, QLabel, QVBoxLayout, QGroupBox, QHBoxLayout
 import napari
 
@@ -78,6 +79,27 @@ class Settings(QWidget):
         self.analyze_node_level.setChecked(False)
         self.analyze_node_level.setEnabled(True)
 
+        #-----
+        #Frangi filter parameters
+        self.min_rad_label = QLabel("Frangi minimum radius:")
+        self.max_rad_label = QLabel("Frangi maximum radius:")
+        self.min_rad_button = QDoubleSpinBox(self)
+        self.min_rad_button.setMinimum(0)
+        self.min_rad_button.setMaximum(25)
+        self.min_rad_button.setSingleStep(0.01)
+        self.min_rad_button.stepBy(10)
+        self.min_rad_button.setValue(0.20)
+        #self.min_rad_button.valueChanged.connect(self.change_param_radius)
+        self.max_rad_button = QDoubleSpinBox(self)
+        self.max_rad_button.setMinimum(0)
+        self.max_rad_button.setMaximum(25)
+        self.max_rad_button.setSingleStep(0.01)
+        self.max_rad_button.stepBy(10)
+        self.max_rad_button.setValue(1.00)
+        #self.max_rad_button.valueChanged.connect(self.change_param_radius)
+        #-----
+
+
         # Track all frames
         self.track_all_frames = QCheckBox("Visualize all frames' voxel tracks")
         self.track_all_frames.setChecked(True)
@@ -122,6 +144,19 @@ class Settings(QWidget):
         processor_layout.addLayout(subprocessor_layout2)
         processor_group.setLayout(processor_layout)
 
+        # Segmentation parameters
+        param_group = QGroupBox("Segmentation parameters")
+        param_layout = QVBoxLayout()
+        for label, button in [
+            (self.min_rad_label, self.min_rad_button),
+            (self.max_rad_label, self.max_rad_button),
+        ]:
+            sub_layout = QHBoxLayout()
+            sub_layout.addWidget(label)
+            sub_layout.addWidget(button)
+            param_layout.addLayout(sub_layout)
+        param_group.setLayout(param_layout)
+
         # Tracking settings
         tracking_group = QGroupBox("Track visualization settings")
         tracking_layout = QVBoxLayout()
@@ -133,6 +168,7 @@ class Settings(QWidget):
         tracking_group.setLayout(tracking_layout)
 
         main_layout.addWidget(processor_group)
+        main_layout.addWidget(param_group)
         main_layout.addWidget(tracking_group)
         self.setLayout(main_layout)
 

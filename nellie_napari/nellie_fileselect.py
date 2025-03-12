@@ -271,12 +271,6 @@ class NellieFileSelect(QWidget):
             slice_layout.addLayout(sub_layout)
         slice_group.setLayout(slice_layout)
 
-        #Parameters Group
-        param_group = QGroupBox("Filter parameters")
-        param_layout = QVBoxLayout()
-        param_layout.addWidget(QLabel("PLACEHOLDER"))
-        param_group.setLayout(param_layout)
-
         # Action Buttons Group
         action_group = QGroupBox("Actions")
         action_layout = QHBoxLayout()
@@ -290,7 +284,6 @@ class NellieFileSelect(QWidget):
         main_layout.addWidget(axes_group)
         main_layout.addWidget(dim_group)
         main_layout.addWidget(slice_group)
-        main_layout.addWidget(param_group)
         main_layout.addWidget(action_group)
 
         self.setLayout(main_layout)
