@@ -89,14 +89,13 @@ class Settings(QWidget):
         self.min_rad_button.setSingleStep(0.01)
         self.min_rad_button.stepBy(10)
         self.min_rad_button.setValue(0.20)
-        self.min_rad_button.valueChanged.connect(self.set_filter_parameters)
+
         self.max_rad_button = QDoubleSpinBox(self)
         self.max_rad_button.setMinimum(0)
         self.max_rad_button.setMaximum(25)
         self.max_rad_button.setSingleStep(0.01)
         self.max_rad_button.stepBy(10)
         self.max_rad_button.setValue(1.00)
-        self.max_rad_button.valueChanged.connect(self.set_filter_parameters)
         #-----
 
 
@@ -171,12 +170,6 @@ class Settings(QWidget):
         main_layout.addWidget(param_group)
         main_layout.addWidget(tracking_group)
         self.setLayout(main_layout)
-
-    def set_filter_parameters(self):
-        #TODO - check min/max are the right way around
-        self.frangi_min_rad = self.min_rad_button.value()
-        self.frangi_max_rad = self.max_rad_button.value()
-        
 
 if __name__ == "__main__":
     import napari

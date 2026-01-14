@@ -309,6 +309,8 @@ class NellieProcessor(QWidget):
             self.current_im_info = im_info
             preprocessing = Filter(im_info=self.current_im_info,
                                    remove_edges=self.nellie.settings.remove_edges_checkbox.isChecked(),
+                                   min_radius_um=self.nellie.settings.min_rad_button.value(),
+                                   max_radius_um=self.nellie.settings.max_rad_button.value(),
                                    viewer=self.viewer)
             preprocessing.run()
 
